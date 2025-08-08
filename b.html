@@ -22,6 +22,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            touch-action: manipulation; /* Improve touch responsiveness */
         }
         
         body {
@@ -91,7 +92,7 @@
             text-align: center;
             color: white;
             position: relative;
-            height: 80vh;
+            height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -107,13 +108,13 @@
         }
         
         .hero h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
@@ -133,6 +134,7 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
             display: inline-block;
             margin-top: 1rem;
+            min-height: 60px; /* Better for touch */
         }
         
         .cta-button:hover {
@@ -152,7 +154,7 @@
             text-align: center;
             margin-bottom: 3rem;
             color: var(--primary-dark);
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         
         .features {
@@ -242,13 +244,13 @@
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -303,6 +305,10 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-height: 100px; /* Better for touch */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .service-card:hover {
@@ -346,11 +352,15 @@
         
         .calendar-day {
             text-align: center;
-            padding: 0.9rem 0.5rem;
+            padding: 1rem 0.5rem;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
             font-weight: 500;
+            min-height: 50px; /* Better for touch */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .calendar-day:hover {
@@ -390,6 +400,10 @@
             cursor: pointer;
             transition: all 0.2s;
             font-size: 0.95rem;
+            min-height: 50px; /* Better for touch */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .time-slot:hover {
@@ -410,6 +424,53 @@
             cursor: not-allowed;
         }
         
+        /* Modal Buttons */
+        .modal-footer {
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            min-height: 55px; /* Better for touch */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(90, 140, 140, 0.1);
+        }
+        
         /* Confirmation Modal */
         .confirmation {
             text-align: center;
@@ -423,7 +484,7 @@
         }
         
         .confirmation h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             color: var(--primary-dark);
         }
@@ -446,6 +507,7 @@
         .detail-item {
             display: flex;
             margin-bottom: 0.8rem;
+            font-size: 1.1rem;
         }
         
         .detail-label {
@@ -465,7 +527,7 @@
             gap: 8px;
             background: #4285F4;
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
@@ -473,6 +535,8 @@
             margin: 1rem 0;
             width: 100%;
             max-width: 300px;
+            font-size: 1.1rem;
+            min-height: 60px; /* Better for touch */
         }
         
         .map-btn:hover {
@@ -518,6 +582,7 @@
             gap: 12px;
             margin-bottom: 1rem;
             align-items: flex-start;
+            font-size: 1.1rem;
         }
         
         .hours-item {
@@ -526,6 +591,7 @@
             margin-bottom: 0.7rem;
             padding-bottom: 0.3rem;
             border-bottom: 1px dashed rgba(255,255,255,0.2);
+            font-size: 1.1rem;
         }
         
         .hours-item.closed {
@@ -553,11 +619,11 @@
             }
             
             .hero h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .cta-button {
@@ -565,6 +631,7 @@
                 font-size: 1.2rem;
                 width: 90%;
                 max-width: 300px;
+                min-height: 55px;
             }
             
             .features {
@@ -573,22 +640,29 @@
             
             .modal-content {
                 margin: 1rem auto;
+                max-height: 95vh;
             }
             
             .footer-content {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        @media (min-width: 769px) {
-            .contact-info {
-                display: block;
-                text-align: right;
+            
+            .modal-footer {
+                flex-direction: column;
+                gap: 0.8rem;
             }
             
-            .contact-info p {
-                margin-bottom: 0.3rem;
-                font-size: 0.95rem;
+            .btn {
+                width: 100%;
+            }
+            
+            .calendar-day {
+                padding: 0.8rem 0.3rem;
+                font-size: 0.9rem;
+            }
+            
+            .service-card {
+                min-height: 90px;
             }
         }
         
@@ -683,8 +757,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline close-modal">Cancel</button>
-                <button class="btn" id="continueToBooking">Continue</button>
+                <button class="btn btn-outline" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="continueToBooking">Continue</button>
             </div>
         </div>
     </div>
@@ -744,7 +818,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-outline" id="backToClient">Back</button>
-                <button class="btn" id="confirmBooking">Confirm Appointment</button>
+                <button class="btn btn-primary" id="confirmBooking">Confirm Appointment</button>
             </div>
         </div>
     </div>
@@ -854,12 +928,13 @@
     </footer>
     
     <script>
-        // Salon details for Park Point, Duluth
+        // Salon details for Park Point Beach, Duluth
         const salon = {
             name: "Park Point Salon",
             address: "123 Park Point Drive, Duluth, MN 55802",
             phone: "(218) 555-1234",
             email: "info@parkpointsalon.com",
+            // Exact coordinates for Park Point Beach
             lat: 46.7270,
             lng: -92.0897
         };
@@ -869,12 +944,13 @@
         const clientModal = document.getElementById('clientModal');
         const bookingModal = document.getElementById('bookingModal');
         const confirmationModal = document.getElementById('confirmationModal');
-        const closeBtns = document.querySelectorAll('.close-btn, .close-modal');
+        const closeBtns = document.querySelectorAll('.close-btn');
         const backToClient = document.getElementById('backToClient');
         const continueToBooking = document.getElementById('continueToBooking');
         const confirmBooking = document.getElementById('confirmBooking');
         const directionsBtn = document.getElementById('directionsBtn');
         const modalOverlays = document.querySelectorAll('.modal-overlay');
+        const cancelBtn = document.getElementById('cancelBtn');
         
         // Form elements
         const clientForm = document.getElementById('clientForm');
@@ -909,6 +985,8 @@
         closeBtns.forEach(btn => {
             btn.addEventListener('click', closeAllModals);
         });
+        
+        cancelBtn.addEventListener('click', closeAllModals);
         
         // Add click outside to close functionality
         modalOverlays.forEach(overlay => {
@@ -990,9 +1068,11 @@
             const isIOS = /iPad|iPhone|iPod/.test(userAgent);
             
             if (isIOS) {
-                window.open(`http://maps.apple.com/?q=${salon.lat},${salon.lng}`);
+                // Open in Apple Maps with Park Point Beach label
+                window.open(`http://maps.apple.com/?q=Park+Point+Beach+Duluth&ll=${salon.lat},${salon.lng}`);
             } else {
-                window.open(`https://www.google.com/maps/dir/?api=1&destination=${salon.lat},${salon.lng}`);
+                // Open in Google Maps
+                window.open(`https://www.google.com/maps/dir/?api=1&destination=${salon.lat},${salon.lng}&destination_place_id=ChIJq6qqq6YHrlIRfI2D0Z0W8yA`);
             }
         }
         
