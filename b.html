@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tonic Salon - Book Your Appointment</title>
-    <link rel="manifest" href="/manifest.json">
+    <title>Park Point Salon - Book Your Appointment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #9c7c5c;
-            --primary-dark: #7a6147;
-            --secondary: #f8f1e9;
-            --accent: #c5a880;
+            --primary: #5a8c8c;
+            --primary-dark: #3a6b6b;
+            --secondary: #f0f7f7;
+            --accent: #8cb3b3;
             --text: #333;
             --light: #fff;
             --shadow: 0 4px 12px rgba(0,0,0,0.1);
-            --radius: 10px;
+            --radius: 12px;
         }
         
         * {
@@ -29,13 +28,14 @@
             background-color: var(--secondary);
             color: var(--text);
             line-height: 1.6;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
-                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%239c7c5c" stroke-width="0.5" opacity="0.1"/></svg>');
             min-height: 100vh;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%235a8c8c" stroke-width="0.5" opacity="0.1"/></svg>');
             display: flex;
             flex-direction: column;
         }
         
+        /* Header Styles */
         header {
             background: var(--light);
             box-shadow: var(--shadow);
@@ -56,7 +56,7 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
         .logo-icon {
@@ -72,140 +72,123 @@
         }
         
         .logo-text h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
         }
         
         .logo-text p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #777;
         }
         
-        .contact-info {
-            display: none;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            flex: 1;
-        }
-        
+        /* Hero Section */
         .hero {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        
-        .hero-content {
+            background: linear-gradient(rgba(90, 140, 140, 0.85), rgba(90, 140, 140, 0.85)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 3rem 1rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
         }
         
         .hero h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--primary-dark);
-            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .hero-image {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            height: 300px;
-            background: linear-gradient(45deg, var(--accent), var(--primary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        
+        .cta-button:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
             text-align: center;
-            padding: 1rem;
+            margin-bottom: 3rem;
+            color: var(--primary-dark);
+            font-size: 2rem;
         }
         
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
         
         .feature-card {
             background: var(--light);
             border-radius: var(--radius);
-            padding: 1.5rem;
+            padding: 2rem;
             box-shadow: var(--shadow);
             text-align: center;
             transition: transform 0.3s ease;
+            border: 1px solid rgba(90, 140, 140, 0.1);
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
         .feature-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .feature-card h3 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             color: var(--primary-dark);
+            font-size: 1.4rem;
         }
         
-        .cta-container {
-            text-align: center;
-            margin: 3rem 0;
-        }
-        
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(156, 124, 92, 0.3);
-            display: inline-block;
-        }
-        
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(156, 124, 92, 0.4);
-        }
-        
-        .btn:active {
-            transform: translateY(1px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -215,8 +198,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
-            align-items: center;
-            justify-content: center;
             overflow: auto;
             padding: 1rem;
         }
@@ -228,10 +209,14 @@
             max-width: 500px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             animation: modalIn 0.4s ease;
+            position: relative;
+            margin: 2rem auto;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         @keyframes modalIn {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -240,32 +225,36 @@
             color: white;
             padding: 1.2rem;
             border-radius: var(--radius) var(--radius) 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
         
         .modal-header h3 {
             font-size: 1.5rem;
+            text-align: center;
         }
         
         .close-btn {
-            background: none;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
             transition: background 0.2s;
         }
         
         .close-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
         }
         
         .modal-body {
@@ -273,21 +262,22 @@
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
             color: #555;
+            font-size: 1.1rem;
         }
         
         .form-control {
             width: 100%;
-            padding: 0.8rem;
+            padding: 1rem;
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 1rem;
             transition: border 0.3s;
         }
@@ -295,9 +285,10 @@
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(156, 124, 92, 0.2);
+            box-shadow: 0 0 0 3px rgba(90, 140, 140, 0.2);
         }
         
+        /* Service Grid */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -308,7 +299,7 @@
         .service-card {
             border: 2px solid #eee;
             border-radius: 8px;
-            padding: 1rem;
+            padding: 1.2rem 0.8rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -316,12 +307,12 @@
         
         .service-card:hover {
             border-color: var(--accent);
-            background: rgba(197, 168, 128, 0.1);
+            background: rgba(140, 179, 179, 0.1);
         }
         
         .service-card.selected {
             border-color: var(--primary);
-            background: rgba(156, 124, 92, 0.1);
+            background: rgba(90, 140, 140, 0.1);
         }
         
         .service-card h4 {
@@ -336,6 +327,7 @@
             font-weight: 600;
         }
         
+        /* Calendar */
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -346,18 +338,19 @@
         .calendar-header {
             text-align: center;
             font-weight: bold;
-            padding: 0.5rem;
+            padding: 0.8rem 0.5rem;
             background: #f5f5f5;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 0.9rem;
         }
         
         .calendar-day {
             text-align: center;
-            padding: 0.8rem 0.5rem;
-            border-radius: 4px;
+            padding: 0.9rem 0.5rem;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
+            font-weight: 500;
         }
         
         .calendar-day:hover {
@@ -381,26 +374,27 @@
             cursor: not-allowed;
         }
         
+        /* Time Slots */
         .time-slots {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
             gap: 0.8rem;
             margin-top: 1rem;
         }
         
         .time-slot {
-            padding: 0.7rem;
+            padding: 0.8rem;
             text-align: center;
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .time-slot:hover {
             border-color: var(--accent);
-            background: rgba(197, 168, 128, 0.1);
+            background: rgba(140, 179, 179, 0.1);
         }
         
         .time-slot.selected {
@@ -416,34 +410,10 @@
             cursor: not-allowed;
         }
         
-        .modal-footer {
-            padding: 1.2rem;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #eee;
-        }
-        
-        .map-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #4285F4;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .map-btn:hover {
-            background: #3367D6;
-            transform: translateY(-2px);
-        }
-        
+        /* Confirmation Modal */
         .confirmation {
             text-align: center;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
         }
         
         .confirmation i {
@@ -488,29 +458,34 @@
             flex: 1;
         }
         
-        .pos-mode {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 0.8rem 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 200;
-            display: flex;
+        .map-btn {
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            background: #4285F4;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            width: 100%;
+            max-width: 300px;
         }
         
+        .map-btn:hover {
+            background: #3367D6;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
         footer {
             background: var(--primary-dark);
             color: white;
-            padding: 2rem 1rem;
-            margin-top: 3rem;
+            padding: 3rem 1rem 2rem;
+            margin-top: auto;
         }
         
         .footer-content {
@@ -522,9 +497,10 @@
         }
         
         .footer-section h3 {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.5rem;
+            font-size: 1.4rem;
         }
         
         .footer-section h3::after {
@@ -539,15 +515,17 @@
         
         .contact-item {
             display: flex;
-            gap: 10px;
-            margin-bottom: 0.8rem;
+            gap: 12px;
+            margin-bottom: 1rem;
             align-items: flex-start;
         }
         
         .hours-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
         }
         
         .hours-item.closed {
@@ -563,11 +541,46 @@
             color: rgba(255, 255, 255, 0.7);
         }
         
-        @media (min-width: 768px) {
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
             .hero {
-                grid-template-columns: 1fr 1fr;
+                height: 85vh;
+                padding: 1rem;
             }
             
+            .hero-content {
+                padding: 1.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-button {
+                padding: 1.2rem 2rem;
+                font-size: 1.2rem;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 1rem auto;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (min-width: 769px) {
             .contact-info {
                 display: block;
                 text-align: right;
@@ -579,12 +592,14 @@
             }
         }
         
-        .hours-notice {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.8rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            font-size: 0.9rem;
+        /* Tap outside to close */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
     </style>
 </head>
@@ -594,68 +609,58 @@
         <div class="logo-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-scissors"></i>
+                    <i class="fas fa-spa"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>Tonic Salon</h1>
-                    <p>Professional Hair Care</p>
+                    <h1>Park Point Salon</h1>
+                    <p>Duluth's Lakeside Beauty Experience</p>
                 </div>
-            </div>
-            <div class="contact-info">
-                <p><i class="fas fa-phone-alt"></i> (218) 722-0460</p>
-                <p><i class="fas fa-map-marker-alt"></i> 12 N 3rd Ave W, Duluth, MN</p>
             </div>
         </div>
     </header>
     
-    <!-- Main Content -->
-    <div class="container">
-        <div class="hero">
-            <div class="hero-content">
-                <h2>Experience Luxury Hair Care on the North Shore</h2>
-                <p>Book your appointment at Tonic Salon for exceptional service in a relaxing atmosphere. Our skilled stylists are ready to transform your look.</p>
-                <div>
-                    <button class="btn" id="bookBtn">Book Appointment</button>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div>Premium Salon Experience<br>in the Heart of Duluth</div>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Lakeside Luxury Hair Care</h2>
+            <p>Experience premium salon services with stunning Lake Superior views. Book your appointment today!</p>
+            <button class="cta-button" id="bookBtn">
+                <i class="fas fa-calendar-check"></i> Book Appointment Now
+            </button>
         </div>
-        
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title">Why Choose Park Point Salon</h2>
         <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h3>Lakeside Location</h3>
+                <p>Enjoy breathtaking views of Lake Superior during your appointment.</p>
+            </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-star"></i>
                 </div>
                 <h3>Expert Stylists</h3>
-                <p>Our team of professionals has over 50 years of combined experience.</p>
+                <p>Our team has over 20 years of combined experience in hair care.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-spa"></i>
                 </div>
                 <h3>Premium Products</h3>
-                <p>We use only the highest quality hair care products for lasting results.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-calendar-check"></i>
-                </div>
-                <h3>Easy Booking</h3>
-                <p>Schedule your appointment online 24/7 with our simple booking system.</p>
+                <p>We use only the highest quality, eco-friendly hair care products.</p>
             </div>
         </div>
-        
-        <div class="cta-container">
-            <h2>Ready for a New Look?</h2>
-            <p>Book your appointment now and experience the Tonic Salon difference</p>
-            <button class="btn" id="bookBtn2">Book Your Appointment</button>
-        </div>
-    </div>
+    </section>
     
     <!-- Client Info Modal -->
     <div class="modal" id="clientModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Your Information</h3>
@@ -686,6 +691,7 @@
     
     <!-- Booking Modal -->
     <div class="modal" id="bookingModal">
+        <div class="modal-overlay" id="modalOverlay2"></div>
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Book Your Appointment</h3>
@@ -695,21 +701,21 @@
                 <div class="form-group">
                     <label>Select Service</label>
                     <div class="service-grid">
-                        <div class="service-card" data-service="Haircut" data-price="45">
-                            <h4>Haircut</h4>
-                            <p>$45</p>
-                        </div>
-                        <div class="service-card" data-service="Color" data-price="85">
-                            <h4>Color</h4>
-                            <p>$85</p>
-                        </div>
-                        <div class="service-card" data-service="Highlights" data-price="110">
-                            <h4>Highlights</h4>
-                            <p>$110</p>
-                        </div>
-                        <div class="service-card" data-service="Styling" data-price="55">
-                            <h4>Styling</h4>
+                        <div class="service-card" data-service="Signature Haircut" data-price="55">
+                            <h4>Signature Haircut</h4>
                             <p>$55</p>
+                        </div>
+                        <div class="service-card" data-service="Color & Gloss" data-price="95">
+                            <h4>Color & Gloss</h4>
+                            <p>$95</p>
+                        </div>
+                        <div class="service-card" data-service="Balayage" data-price="125">
+                            <h4>Balayage</h4>
+                            <p>$125</p>
+                        </div>
+                        <div class="service-card" data-service="Spa Treatment" data-price="75">
+                            <h4>Spa Treatment</h4>
+                            <p>$75</p>
                         </div>
                     </div>
                 </div>
@@ -745,11 +751,12 @@
     
     <!-- Confirmation Modal -->
     <div class="modal" id="confirmationModal">
+        <div class="modal-overlay" id="modalOverlay3"></div>
         <div class="modal-content">
             <div class="confirmation">
                 <i class="fas fa-check-circle"></i>
                 <h3>Appointment Confirmed!</h3>
-                <p>Thank you for booking with Tonic Salon. We're looking forward to seeing you!</p>
+                <p>Thank you for booking with Park Point Salon. We're looking forward to seeing you!</p>
                 
                 <div class="appointment-details">
                     <div class="detail-item">
@@ -770,7 +777,7 @@
                     </div>
                 </div>
                 
-                <p>An email confirmation has been sent to <strong id="confirmEmail">-</strong></p>
+                <p>A confirmation has been sent to <strong id="confirmEmail">-</strong></p>
                 
                 <a href="#" class="map-btn" id="directionsBtn">
                     <i class="fas fa-map-marker-alt"></i> Get Directions to Salon
@@ -779,11 +786,6 @@
         </div>
     </div>
     
-    <!-- POS Mode Toggle -->
-    <button class="pos-mode" id="posToggle">
-        <i class="fas fa-cash-register"></i> POS Mode
-    </button>
-    
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -791,15 +793,15 @@
                 <h3>Contact Us</h3>
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <div>12 N 3rd Ave W<br>Duluth, MN 55802</div>
+                    <div>123 Park Point Drive<br>Duluth, MN 55802</div>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone-alt"></i>
-                    <div>(218) 722-0460</div>
+                    <div>(218) 555-1234</div>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <div>hello@tonicsalonduluth.com</div>
+                    <div>info@parkpointsalon.com</div>
                 </div>
             </div>
             
@@ -807,67 +809,63 @@
                 <h3>Business Hours</h3>
                 <div class="hours-item">
                     <span>Sunday</span>
-                    <span>7:00 AM - 4:00 PM</span>
+                    <span>9:00 AM - 5:00 PM</span>
                 </div>
                 <div class="hours-item">
                     <span>Monday</span>
-                    <span>7:00 AM - 4:00 PM</span>
+                    <span>8:00 AM - 6:00 PM</span>
                 </div>
                 <div class="hours-item">
                     <span>Tuesday</span>
-                    <span>7:00 AM - 4:00 PM</span>
+                    <span>8:00 AM - 6:00 PM</span>
                 </div>
                 <div class="hours-item">
                     <span>Wednesday</span>
-                    <span>7:00 AM - 4:00 PM</span>
+                    <span>8:00 AM - 6:00 PM</span>
                 </div>
                 <div class="hours-item">
                     <span>Thursday</span>
-                    <span>7:00 AM - 4:00 PM</span>
+                    <span>8:00 AM - 7:00 PM</span>
                 </div>
                 <div class="hours-item">
                     <span>Friday</span>
-                    <span>7:00 AM - 4:00 PM</span>
+                    <span>8:00 AM - 7:00 PM</span>
                 </div>
                 <div class="hours-item closed">
                     <span>Saturday</span>
                     <span>Closed</span>
                 </div>
-                <div class="hours-notice">
-                    <i class="fas fa-info-circle"></i> We're closed on Saturdays
-                </div>
             </div>
             
             <div class="footer-section">
                 <h3>Follow Us</h3>
-                <p>Stay connected for the latest updates and promotions</p>
+                <p>Stay connected for special offers and updates</p>
                 <div style="display: flex; gap: 15px; margin-top: 1rem;">
                     <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
                     <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
-                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; 2023 Tonic Salon. All rights reserved.
+            &copy; 2023 Park Point Salon. All rights reserved.
         </div>
     </footer>
     
     <script>
-        // Salon details
+        // Salon details for Park Point, Duluth
         const salon = {
-            name: "Tonic Salon",
-            address: "12 N 3rd Ave W, Duluth, MN 55802",
-            phone: "(218) 722-0460",
-            email: "hello@tonicsalonduluth.com",
-            lat: 46.7862,
-            lng: -92.0947
+            name: "Park Point Salon",
+            address: "123 Park Point Drive, Duluth, MN 55802",
+            phone: "(218) 555-1234",
+            email: "info@parkpointsalon.com",
+            lat: 46.7270,
+            lng: -92.0897
         };
         
         // DOM Elements
         const bookBtn = document.getElementById('bookBtn');
-        const bookBtn2 = document.getElementById('bookBtn2');
         const clientModal = document.getElementById('clientModal');
         const bookingModal = document.getElementById('bookingModal');
         const confirmationModal = document.getElementById('confirmationModal');
@@ -876,7 +874,7 @@
         const continueToBooking = document.getElementById('continueToBooking');
         const confirmBooking = document.getElementById('confirmBooking');
         const directionsBtn = document.getElementById('directionsBtn');
-        const posToggle = document.getElementById('posToggle');
+        const modalOverlays = document.querySelectorAll('.modal-overlay');
         
         // Form elements
         const clientForm = document.getElementById('clientForm');
@@ -907,10 +905,14 @@
         
         // Event Listeners
         bookBtn.addEventListener('click', () => openModal(clientModal));
-        bookBtn2.addEventListener('click', () => openModal(clientModal));
         
         closeBtns.forEach(btn => {
             btn.addEventListener('click', closeAllModals);
+        });
+        
+        // Add click outside to close functionality
+        modalOverlays.forEach(overlay => {
+            overlay.addEventListener('click', closeAllModals);
         });
         
         backToClient.addEventListener('click', () => {
@@ -953,9 +955,6 @@
             
             bookingModal.style.display = 'none';
             confirmationModal.style.display = 'flex';
-            
-            // In a real app, send data to server here
-            console.log('Booking confirmed:', bookingData);
         });
         
         directionsBtn.addEventListener('click', (e) => {
@@ -971,18 +970,6 @@
                 bookingData.service = card.dataset.service;
                 bookingData.price = card.dataset.price;
             });
-        });
-        
-        // POS Mode Toggle
-        posToggle.addEventListener('click', () => {
-            document.body.classList.toggle('pos-mode-active');
-            if (document.body.classList.contains('pos-mode-active')) {
-                posToggle.innerHTML = '<i class="fas fa-desktop"></i> Online Mode';
-                openModal(clientModal);
-            } else {
-                posToggle.innerHTML = '<i class="fas fa-cash-register"></i> POS Mode';
-                closeAllModals();
-            }
         });
         
         // Functions
@@ -1003,10 +990,8 @@
             const isIOS = /iPad|iPhone|iPod/.test(userAgent);
             
             if (isIOS) {
-                // Open in Apple Maps
                 window.open(`http://maps.apple.com/?q=${salon.lat},${salon.lng}`);
             } else {
-                // Open in Google Maps
                 window.open(`https://www.google.com/maps/dir/?api=1&destination=${salon.lat},${salon.lng}`);
             }
         }
@@ -1066,10 +1051,9 @@
             const timeSlots = document.getElementById('timeSlots');
             timeSlots.innerHTML = '';
             
-            // New hours: 7:00 AM to 4:00 PM
             const times = [
-                '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', 
-                '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'
+                '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', 
+                '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'
             ];
             
             // Randomly book some slots to simulate real availability
