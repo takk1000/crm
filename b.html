@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tonic Salon - Book Your Appointment</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #9c7c5c;
+            --primary-dark: #7a6147;
+            --secondary: #f8f1e9;
+            --accent: #c5a880;
+            --text: #333;
+            --light: #fff;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%239c7c5c" stroke-width="0.5" opacity="0.1"/></svg>');
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: var(--light);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .contact-info {
+            display: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+        
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .hero-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 300px;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .cta-container {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(156, 124, 92, 0.3);
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(156, 124, 92, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: modalIn 0.4s ease;
+        }
+        
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.5rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(156, 124, 92, 0.2);
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .service-card {
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            border-color: var(--accent);
+            background: rgba(197, 168, 128, 0.1);
+        }
+        
+        .service-card.selected {
+            border-color: var(--primary);
+            background: rgba(156, 124, 92, 0.1);
+        }
+        
+        .service-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .service-card p {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            padding: 0.5rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .calendar-day {
+            text-align: center;
+            padding: 0.8rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .calendar-day:hover {
+            background: #f0f0f0;
+        }
+        
+        .calendar-day.selected {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .calendar-day.disabled {
+            color: #ccc;
+            background: #f8f8f8;
+            cursor: not-allowed;
+        }
+        
+        .calendar-day.closed {
+            color: #ff6b6b;
+            background: #fff5f5;
+            cursor: not-allowed;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .time-slot {
+            padding: 0.7rem;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .time-slot:hover {
+            border-color: var(--accent);
+            background: rgba(197, 168, 128, 0.1);
+        }
+        
+        .time-slot.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .time-slot.booked {
+            background: #f8f8f8;
+            color: #ccc;
+            text-decoration: line-through;
+            cursor: not-allowed;
+        }
+        
+        .modal-footer {
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+        }
+        
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #4285F4;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .map-btn:hover {
+            background: #3367D6;
+            transform: translateY(-2px);
+        }
+        
+        .confirmation {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .confirmation i {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 1.5rem;
+        }
+        
+        .confirmation h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .confirmation p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .appointment-details {
+            background: #f9f9f9;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .detail-item {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            width: 120px;
+            color: #555;
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .pos-mode {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+            align-items: flex-start;
+        }
+        
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hours-item.closed {
+            color: #ff9999;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (min-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .contact-info {
+                display: block;
+                text-align: right;
+            }
+            
+            .contact-info p {
+                margin-bottom: 0.3rem;
+                font-size: 0.95rem;
+            }
+        }
+        
+        .hours-notice {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-scissors"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Tonic Salon</h1>
+                    <p>Professional Hair Care</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <p><i class="fas fa-phone-alt"></i> (218) 722-0460</p>
+                <p><i class="fas fa-map-marker-alt"></i> 12 N 3rd Ave W, Duluth, MN</p>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <h2>Experience Luxury Hair Care on the North Shore</h2>
+                <p>Book your appointment at Tonic Salon for exceptional service in a relaxing atmosphere. Our skilled stylists are ready to transform your look.</p>
+                <div>
+                    <button class="btn" id="bookBtn">Book Appointment</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div>Premium Salon Experience<br>in the Heart of Duluth</div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Expert Stylists</h3>
+                <p>Our team of professionals has over 50 years of combined experience.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <h3>Premium Products</h3>
+                <p>We use only the highest quality hair care products for lasting results.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Easy Booking</h3>
+                <p>Schedule your appointment online 24/7 with our simple booking system.</p>
+            </div>
+        </div>
+        
+        <div class="cta-container">
+            <h2>Ready for a New Look?</h2>
+            <p>Book your appointment now and experience the Tonic Salon difference</p>
+            <button class="btn" id="bookBtn2">Book Your Appointment</button>
+        </div>
+    </div>
+    
+    <!-- Client Info Modal -->
+    <div class="modal" id="clientModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Your Information</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="clientForm">
+                    <div class="form-group">
+                        <label for="clientName">Full Name</label>
+                        <input type="text" id="clientName" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Email Address</label>
+                        <input type="email" id="clientEmail" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientPhone">Phone Number</label>
+                        <input type="tel" id="clientPhone" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline close-modal">Cancel</button>
+                <button class="btn" id="continueToBooking">Continue</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Book Your Appointment</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Select Service</label>
+                    <div class="service-grid">
+                        <div class="service-card" data-service="Haircut" data-price="45">
+                            <h4>Haircut</h4>
+                            <p>$45</p>
+                        </div>
+                        <div class="service-card" data-service="Color" data-price="85">
+                            <h4>Color</h4>
+                            <p>$85</p>
+                        </div>
+                        <div class="service-card" data-service="Highlights" data-price="110">
+                            <h4>Highlights</h4>
+                            <p>$110</p>
+                        </div>
+                        <div class="service-card" data-service="Styling" data-price="55">
+                            <h4>Styling</h4>
+                            <p>$55</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointmentDate">Select Date</label>
+                    <div class="calendar">
+                        <div class="calendar-header">Sun</div>
+                        <div class="calendar-header">Mon</div>
+                        <div class="calendar-header">Tue</div>
+                        <div class="calendar-header">Wed</div>
+                        <div class="calendar-header">Thu</div>
+                        <div class="calendar-header">Fri</div>
+                        <div class="calendar-header">Sat</div>
+                        
+                        <!-- Calendar days will be populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Available Times</label>
+                    <div class="time-slots" id="timeSlots">
+                        <!-- Time slots will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="backToClient">Back</button>
+                <button class="btn" id="confirmBooking">Confirm Appointment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="confirmation">
+                <i class="fas fa-check-circle"></i>
+                <h3>Appointment Confirmed!</h3>
+                <p>Thank you for booking with Tonic Salon. We're looking forward to seeing you!</p>
+                
+                <div class="appointment-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Name:</div>
+                        <div class="detail-value" id="confirmName">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Service:</div>
+                        <div class="detail-value" id="confirmService">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Date:</div>
+                        <div class="detail-value" id="confirmDate">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Time:</div>
+                        <div class="detail-value" id="confirmTime">-</div>
+                    </div>
+                </div>
+                
+                <p>An email confirmation has been sent to <strong id="confirmEmail">-</strong></p>
+                
+                <a href="#" class="map-btn" id="directionsBtn">
+                    <i class="fas fa-map-marker-alt"></i> Get Directions to Salon
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- POS Mode Toggle -->
+    <button class="pos-mode" id="posToggle">
+        <i class="fas fa-cash-register"></i> POS Mode
+    </button>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>12 N 3rd Ave W<br>Duluth, MN 55802</div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>(218) 722-0460</div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>hello@tonicsalonduluth.com</div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Business Hours</h3>
+                <div class="hours-item">
+                    <span>Sunday</span>
+                    <span>7:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span>Monday</span>
+                    <span>7:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span>Tuesday</span>
+                    <span>7:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span>Wednesday</span>
+                    <span>7:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span>Thursday</span>
+                    <span>7:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span>Friday</span>
+                    <span>7:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item closed">
+                    <span>Saturday</span>
+                    <span>Closed</span>
+                </div>
+                <div class="hours-notice">
+                    <i class="fas fa-info-circle"></i> We're closed on Saturdays
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay connected for the latest updates and promotions</p>
+                <div style="display: flex; gap: 15px; margin-top: 1rem;">
+                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Tonic Salon. All rights reserved.
+        </div>
+    </footer>
+    
+    <script>
+        // Salon details
+        const salon = {
+            name: "Tonic Salon",
+            address: "12 N 3rd Ave W, Duluth, MN 55802",
+            phone: "(218) 722-0460",
+            email: "hello@tonicsalonduluth.com",
+            lat: 46.7862,
+            lng: -92.0947
+        };
+        
+        // DOM Elements
+        const bookBtn = document.getElementById('bookBtn');
+        const bookBtn2 = document.getElementById('bookBtn2');
+        const clientModal = document.getElementById('clientModal');
+        const bookingModal = document.getElementById('bookingModal');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const closeBtns = document.querySelectorAll('.close-btn, .close-modal');
+        const backToClient = document.getElementById('backToClient');
+        const continueToBooking = document.getElementById('continueToBooking');
+        const confirmBooking = document.getElementById('confirmBooking');
+        const directionsBtn = document.getElementById('directionsBtn');
+        const posToggle = document.getElementById('posToggle');
+        
+        // Form elements
+        const clientForm = document.getElementById('clientForm');
+        const clientName = document.getElementById('clientName');
+        const clientEmail = document.getElementById('clientEmail');
+        const clientPhone = document.getElementById('clientPhone');
+        
+        // Confirmation elements
+        const confirmName = document.getElementById('confirmName');
+        const confirmEmail = document.getElementById('confirmEmail');
+        const confirmService = document.getElementById('confirmService');
+        const confirmDate = document.getElementById('confirmDate');
+        const confirmTime = document.getElementById('confirmTime');
+        
+        // Booking data
+        let bookingData = {
+            name: '',
+            email: '',
+            phone: '',
+            service: '',
+            date: '',
+            time: '',
+            price: 0
+        };
+        
+        // Service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        
+        // Event Listeners
+        bookBtn.addEventListener('click', () => openModal(clientModal));
+        bookBtn2.addEventListener('click', () => openModal(clientModal));
+        
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', closeAllModals);
+        });
+        
+        backToClient.addEventListener('click', () => {
+            bookingModal.style.display = 'none';
+            clientModal.style.display = 'flex';
+        });
+        
+        continueToBooking.addEventListener('click', () => {
+            if (clientForm.checkValidity()) {
+                bookingData.name = clientName.value;
+                bookingData.email = clientEmail.value;
+                bookingData.phone = clientPhone.value;
+                
+                clientModal.style.display = 'none';
+                bookingModal.style.display = 'flex';
+                generateCalendar();
+                generateTimeSlots();
+            } else {
+                clientForm.reportValidity();
+            }
+        });
+        
+        confirmBooking.addEventListener('click', () => {
+            if (!bookingData.service) {
+                alert('Please select a service');
+                return;
+            }
+            
+            if (!bookingData.date || !bookingData.time) {
+                alert('Please select a date and time');
+                return;
+            }
+            
+            // Show confirmation
+            confirmName.textContent = bookingData.name;
+            confirmEmail.textContent = bookingData.email;
+            confirmService.textContent = `${bookingData.service} - $${bookingData.price}`;
+            confirmDate.textContent = bookingData.date;
+            confirmTime.textContent = bookingData.time;
+            
+            bookingModal.style.display = 'none';
+            confirmationModal.style.display = 'flex';
+            
+            // In a real app, send data to server here
+            console.log('Booking confirmed:', bookingData);
+        });
+        
+        directionsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openDirections();
+        });
+        
+        // Service card selection
+        serviceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                serviceCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                bookingData.service = card.dataset.service;
+                bookingData.price = card.dataset.price;
+            });
+        });
+        
+        // POS Mode Toggle
+        posToggle.addEventListener('click', () => {
+            document.body.classList.toggle('pos-mode-active');
+            if (document.body.classList.contains('pos-mode-active')) {
+                posToggle.innerHTML = '<i class="fas fa-desktop"></i> Online Mode';
+                openModal(clientModal);
+            } else {
+                posToggle.innerHTML = '<i class="fas fa-cash-register"></i> POS Mode';
+                closeAllModals();
+            }
+        });
+        
+        // Functions
+        function openModal(modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeAllModals() {
+            clientModal.style.display = 'none';
+            bookingModal.style.display = 'none';
+            confirmationModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function openDirections() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+            
+            if (isIOS) {
+                // Open in Apple Maps
+                window.open(`http://maps.apple.com/?q=${salon.lat},${salon.lng}`);
+            } else {
+                // Open in Google Maps
+                window.open(`https://www.google.com/maps/dir/?api=1&destination=${salon.lat},${salon.lng}`);
+            }
+        }
+        
+        function generateCalendar() {
+            const calendar = document.querySelector('.calendar');
+            // Clear existing days except headers
+            while (calendar.children.length > 7) {
+                calendar.removeChild(calendar.lastChild);
+            }
+            
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Generate days
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day disabled';
+                emptyDay.textContent = '';
+                calendar.appendChild(emptyDay);
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                if (date < today) {
+                    dayElement.classList.add('disabled');
+                } else if (dayOfWeek === 6) { // Saturday (closed)
+                    dayElement.classList.add('closed');
+                    dayElement.textContent = `${day} (Closed)`;
+                } else {
+                    dayElement.addEventListener('click', () => {
+                        document.querySelectorAll('.calendar-day').forEach(d => {
+                            d.classList.remove('selected');
+                        });
+                        dayElement.classList.add('selected');
+                        bookingData.date = date.toLocaleDateString('en-US', { 
+                            weekday: 'long', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        });
+                    });
+                }
+                
+                calendar.appendChild(dayElement);
+            }
+        }
+        
+        function generateTimeSlots() {
+            const timeSlots = document.getElementById('timeSlots');
+            timeSlots.innerHTML = '';
+            
+            // New hours: 7:00 AM to 4:00 PM
+            const times = [
+                '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', 
+                '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'
+            ];
+            
+            // Randomly book some slots to simulate real availability
+            const bookedSlots = [2, 5, 7];
+            
+            times.forEach((time, index) => {
+                const slot = document.createElement('div');
+                slot.className = 'time-slot';
+                
+                if (bookedSlots.includes(index)) {
+                    slot.classList.add('booked');
+                    slot.textContent = time;
+                } else {
+                    slot.textContent = time;
+                    slot.addEventListener('click', () => {
+                        document.querySelectorAll('.time-slot').forEach(s => {
+                            s.classList.remove('selected');
+                        });
+                        slot.classList.add('selected');
+                        bookingData.time = time;
+                    });
+                }
+                
+                timeSlots.appendChild(slot);
+            });
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // In a real app, we would load available dates/times from a server
+        });
+    </script>
+</body>
+</html>
